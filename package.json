@@ -1,0 +1,25 @@
+{
+  "name": "fitness-club-gym",
+  "version": "1.0.0",
+  "description": "Full-Stack Website & Portal for Fitness Club Gym (Modular Monolith)",
+  "main": "backend/src/server.js",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build",
+    "seed:admin": "cd backend && node scripts/createAdmin.js"
+  },
+  "keywords": [
+    "fitness",
+    "gym",
+    "mern",
+    "react",
+    "express",
+    "mongodb",
+    "vite",
+    "tailwind"
+  ],
+  "author": "",
+  "license": "ISC"
+}
