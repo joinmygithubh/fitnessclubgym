@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const mongoose = require('mongoose');
 const { apiLimiter } = require('./middleware/rateLimitMiddleware');
 const { errorHandler } = require('./middleware/errorMiddleware');
 const { sendError } = require('./utils/response');
@@ -46,14 +47,34 @@ app.use(apiLimiter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Health Check API
-app.get('/api/v1/health', (req, res) => {
+// Root API Information Endpoint
+app.get('/', (req, res) => {
   res.status(200).json({
     success: true,
-    message: 'Fitness Club Gym API is healthy',
-    timestamp: new Date().toISOString()
+    message: 'Fitness Club Gym API is running',
+    status: 'ok',
+    environment: process.env.NODE_ENV || 'development'
   });
 });
+
+// Production-ready Health Check Handler
+const getHealthStatus = (req, res) => {
+  const isDbConnected = mongoose.connection.readyState === 1;
+  const statusCode = isDbConnected ? 200 : 503;
+
+  return res.status(statusCode).json({
+    success: isDbConnected,
+    message: isDbConnected ? 'Fitness Club Gym API is healthy' : 'Fitness Club Gym API is unhealthy',
+    status: isDbConnected ? 'ok' : 'error',
+    database: isDbConnected ? 'connected' : 'disconnected',
+    environment: process.env.NODE_ENV || 'development',
+    timestamp: new Date().toISOString()
+  });
+};
+
+// Health Check API Endpoints
+app.get('/api/health', getHealthStatus);
+app.get('/api/v1/health', getHealthStatus);
 
 // API Routes
 app.use('/api/v1/auth', authRoutes);
