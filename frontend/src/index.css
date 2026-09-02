@@ -101,12 +101,110 @@
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Reduced Motion Utility */
-@media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
+
+.animate-marquee {
+  display: flex;
+  flex-shrink: 0;
+  width: max-content;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
+}
+
+/* --- Scroll Reveal & Micro-Interactions System --- */
+.reveal-base {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition-property: transform, opacity;
+  transition-duration: 600ms;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-fade-up {
+  transform: translateY(28px);
+}
+
+.reveal-fade-in {
+  transform: translateY(0);
+}
+
+.reveal-slide-left {
+  transform: translateX(-32px);
+}
+
+.reveal-slide-right {
+  transform: translateX(32px);
+}
+
+.reveal-scale-in {
+  transform: scale(0.94);
+}
+
+/* Active State Triggered by Intersection Observer */
+.reveal-base.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Stagger Delays */
+.delay-75 { transition-delay: 75ms; }
+.delay-100 { transition-delay: 100ms; }
+.delay-150 { transition-delay: 150ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* Navbar Link Underline Micro-interaction */
+.nav-link-hover {
+  position: relative;
+}
+
+.nav-link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #f59e0b;
+  border-radius: 9999px;
+  transition: width 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link-hover:hover::after,
+.nav-link-hover.active::after {
+  width: 100%;
+}
+
+/* Card Lift & Border Glow Micro-interactions */
+.card-hover-effect {
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-6px);
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(245, 158, 11, 0.12);
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-base {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+

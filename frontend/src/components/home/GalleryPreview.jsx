@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import ScrollReveal from '../common/ScrollReveal';
 
 const galleryItems = [
   {
@@ -43,7 +44,7 @@ const GalleryPreview = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <ScrollReveal variant="fade-up" delay={0} className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3">
             <span className="editorial-tag text-amber-500 text-xs block">FACILITY GALLERY</span>
             <h2 className="text-4xl sm:text-6xl font-display font-extrabold text-white uppercase tracking-tight">
@@ -56,34 +57,40 @@ const GalleryPreview = () => {
             className="inline-flex items-center gap-2 text-xs font-display font-extrabold uppercase tracking-widest text-amber-400 hover:text-amber-300 group"
           >
             <span>VIEW FULL GALLERY</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform stroke-[3]" />
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300 stroke-[3]" />
           </Link>
-        </div>
+        </ScrollReveal>
 
         {/* Editorial Masonry Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {galleryItems.map((img) => (
-            <div
+          {galleryItems.map((img, idx) => (
+            <ScrollReveal
               key={img.id}
-              className={`group relative overflow-hidden rounded-3xl bg-[#11141c] border border-white/10 ${img.colSpan} ${img.height}`}
+              variant="scale-in"
+              delay={idx * 100}
+              className={`${img.colSpan}`}
             >
-              <img
-                src={img.url}
-                alt={img.title}
-                loading="lazy"
-                className="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-              
-              <div className="absolute bottom-6 left-6 right-6 space-y-2">
-                <span className="editorial-tag text-[9px] bg-amber-500 text-black px-2.5 py-1 rounded-full font-bold inline-block">
-                  {img.category}
-                </span>
-                <h3 className="text-lg font-display font-extrabold text-white uppercase tracking-wider leading-snug">
-                  {img.title}
-                </h3>
+              <div
+                className={`group relative overflow-hidden rounded-3xl bg-[#11141c] border border-white/10 ${img.height} card-hover-effect cursor-pointer`}
+              >
+                <img
+                  src={img.url}
+                  alt={img.title}
+                  loading="lazy"
+                  className="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                
+                <div className="absolute bottom-6 left-6 right-6 space-y-2">
+                  <span className="editorial-tag text-[9px] bg-amber-500 text-black px-2.5 py-1 rounded-full font-bold inline-block shadow-md">
+                    {img.category}
+                  </span>
+                  <h3 className="text-lg font-display font-extrabold text-white uppercase tracking-wider leading-snug group-hover:text-amber-400 transition-colors">
+                    {img.title}
+                  </h3>
+                </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
 

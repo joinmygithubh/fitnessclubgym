@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getGalleryItemsApi } from '../services/galleryService';
-import { X, Image as ImageIcon } from 'lucide-react';
+import { X } from 'lucide-react';
+import ScrollReveal from '../components/common/ScrollReveal';
 
 const fallbackGallery = [
   {
@@ -72,36 +73,50 @@ const Gallery = () => {
     : items.filter((i) => (i.category || 'Gym Facilities') === selectedCategory);
 
   return (
-    <div className="py-20 lg:py-28 bg-[#08090c]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <div className="relative min-h-screen py-16 sm:py-20 lg:py-28 overflow-hidden">
+      
+      {/* LAYER 1: 1920px High-Res Background Image & LAYER 2: Transparent Dark Overlay (50% opacity) */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        <img
+          src="/gallery-hero-bg.jpg"
+          alt="Modern Gym Interior Gallery Background"
+          className="w-full h-full object-cover object-[55%_30%] sm:object-[50%_35%] md:object-center filter brightness-95 contrast-[1.03]"
+        />
+        <div className="absolute inset-0 bg-black/50"></div>
+      </div>
+
+      {/* LAYER 3: Page Content / Text (Top Layer) */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 lg:space-y-16">
         
         {/* Header */}
-        <div className="space-y-4 max-w-3xl">
-          <span className="editorial-tag text-amber-500 text-xs block">PHOTOGRAPHY & FACILITY</span>
-          <h1 className="text-5xl sm:text-7xl font-display font-extrabold text-white uppercase tracking-tight leading-none">
+        <ScrollReveal variant="fade-up" delay={0} className="space-y-4 max-w-3xl">
+          <span className="editorial-tag text-amber-400 text-xs sm:text-sm block font-bold tracking-widest drop-shadow-md">
+            PHOTOGRAPHY & FACILITY
+          </span>
+          <h1 className="text-5xl sm:text-7xl font-display font-extrabold text-white uppercase tracking-tight leading-none drop-shadow-lg">
             FACILITY <span className="gold-gradient-text">GALLERY</span>
           </h1>
-          <p className="text-slate-300 text-lg font-sans font-medium leading-relaxed pt-2">
+          <p className="text-slate-200 text-lg font-sans font-medium leading-relaxed pt-2 drop-shadow-md">
             Explore Fitness Club Gym workout spaces, strength stations, and equipment setup.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Filter Pills */}
-        <div className="flex flex-wrap items-center gap-3">
+        <ScrollReveal variant="fade-up" delay={100} className="flex flex-wrap items-center gap-3">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-5 py-2.5 rounded-full text-xs font-display font-extrabold uppercase tracking-widest transition-all ${
+              className={`px-5 py-2.5 rounded-full text-xs font-display font-extrabold uppercase tracking-widest transition-all duration-300 ${
                 selectedCategory === cat
-                  ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20'
-                  : 'bg-[#11141c] text-slate-300 hover:text-white border border-white/10'
+                  ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20 scale-105'
+                  : 'bg-[#11141c]/80 backdrop-blur-md text-slate-200 hover:text-white border border-white/15 hover:border-amber-400/40'
               }`}
             >
               {cat}
             </button>
           ))}
-        </div>
+        </ScrollReveal>
 
         {/* Editorial Masonry Grid */}
         {loading ? (
@@ -111,28 +126,34 @@ const Gallery = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredItems.map((item, idx) => (
-              <div
+              <ScrollReveal
                 key={item._id}
-                onClick={() => setLightboxImage(item)}
-                className={`group cursor-pointer relative overflow-hidden rounded-3xl bg-[#11141c] border border-white/10 shadow-xl ${
-                  idx % 3 === 0 ? 'md:col-span-2 lg:col-span-2 h-[420px]' : 'h-[420px]'
-                }`}
+                variant="scale-in"
+                delay={idx * 80}
+                className={idx % 3 === 0 ? 'md:col-span-2 lg:col-span-2' : ''}
               >
-                <img
-                  src={item.imageUrl}
-                  alt={item.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
-                
-                <div className="absolute bottom-6 left-6 right-6 space-y-2">
-                  <span className="editorial-tag text-[9px] bg-amber-500 text-black px-2.5 py-1 rounded-full font-bold inline-block">
-                    {item.category || 'Gym Facility'}
-                  </span>
-                  <h3 className="text-xl font-display font-extrabold text-white uppercase tracking-tight">{item.title}</h3>
+                <div
+                  onClick={() => setLightboxImage(item)}
+                  className="group cursor-pointer relative overflow-hidden rounded-3xl bg-[#11141c]/80 backdrop-blur-md border border-white/10 shadow-xl h-[420px] card-hover-effect"
+                >
+                  <img
+                    src={item.imageUrl}
+                    alt={item.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity"></div>
+                  
+                  <div className="absolute bottom-6 left-6 right-6 space-y-2">
+                    <span className="editorial-tag text-[9px] bg-amber-500 text-black px-2.5 py-1 rounded-full font-bold inline-block shadow-md">
+                      {item.category || 'Gym Facility'}
+                    </span>
+                    <h3 className="text-xl font-display font-extrabold text-white uppercase tracking-tight group-hover:text-amber-400 transition-colors">
+                      {item.title}
+                    </h3>
+                  </div>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         )}
@@ -140,7 +161,7 @@ const Gallery = () => {
         {/* Lightbox Modal */}
         {lightboxImage && (
           <div
-            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8"
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 animate-fade-in"
             onClick={() => setLightboxImage(null)}
           >
             <div

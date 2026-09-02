@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { BUSINESS_INFO, GET_WHATSAPP_LINK } from '../../constants';
-import { Phone, MapPin, Instagram, MessageSquare, ArrowUpRight, Clock } from 'lucide-react';
+import { Phone, Instagram, MessageSquare, ArrowUpRight } from 'lucide-react';
+import ScrollReveal from '../common/ScrollReveal';
 
 const Footer = () => {
   return (
@@ -9,17 +10,17 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Editorial Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
+        <ScrollReveal variant="fade-in" delay={0} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
           
           {/* Brand Info (5 Cols) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-3.5 group cursor-default">
               <img
                 src="/logo.jpg"
                 alt="Fitness Club Gym Logo"
-                className="w-10 h-10 rounded-lg object-contain border border-amber-500/40 bg-black"
+                className="w-10 h-10 rounded-lg object-contain border border-amber-500/40 bg-black group-hover:border-amber-400 transition-colors shadow-md shadow-amber-500/10"
               />
-              <span className="font-display font-extrabold text-xl tracking-wider text-white uppercase">
+              <span className="font-display font-extrabold text-xl tracking-wider text-white uppercase group-hover:text-amber-400 transition-colors">
                 FITNESS CLUB <span className="text-amber-500">GYM</span>
               </span>
             </div>
@@ -28,7 +29,7 @@ const Footer = () => {
               Build Strength. Build Confidence. Build Yourself. A premier fitness facility in Sehatpur, Faridabad dedicated to disciplined training and long-term health.
             </p>
 
-            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 max-w-md space-y-1">
+            <div className="p-4 rounded-2xl bg-white/5 border border-white/10 max-w-md space-y-1 hover:border-amber-500/30 transition-colors">
               <span className="editorial-tag text-[10px] text-amber-500 block">GYM LEADERSHIP</span>
               <p className="text-sm font-extrabold text-white uppercase tracking-wider">{BUSINESS_INFO.owner}</p>
               <p className="text-xs text-slate-400">Owner, Fitness Club Gym</p>
@@ -47,8 +48,8 @@ const Footer = () => {
                       to={path}
                       className="text-slate-400 hover:text-amber-400 transition-colors inline-flex items-center gap-1 group"
                     >
-                      <span>{item}</span>
-                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <span className="group-hover:translate-x-1 transition-transform">{item}</span>
+                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all duration-300" />
                     </Link>
                   </li>
                 );
@@ -100,7 +101,7 @@ const Footer = () => {
                 href={BUSINESS_INFO.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-full bg-white/5 hover:bg-pink-500/20 text-pink-400 border border-white/10 transition-colors"
+                className="p-2.5 rounded-full bg-white/5 hover:bg-pink-500/20 text-pink-400 border border-white/10 hover:border-pink-500/40 transition-all duration-300 hover:scale-110"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
@@ -109,7 +110,7 @@ const Footer = () => {
                 href={GET_WHATSAPP_LINK()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-full bg-white/5 hover:bg-emerald-500/20 text-emerald-400 border border-white/10 transition-colors"
+                className="p-2.5 rounded-full bg-white/5 hover:bg-emerald-500/20 text-emerald-400 border border-white/10 hover:border-emerald-500/40 transition-all duration-300 hover:scale-110"
                 aria-label="WhatsApp"
               >
                 <MessageSquare className="w-4 h-4" />
@@ -117,7 +118,7 @@ const Footer = () => {
             </div>
           </div>
 
-        </div>
+        </ScrollReveal>
 
         {/* Bottom Copyright */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500 gap-4">

@@ -4,7 +4,12 @@ const User = require('../src/models/User');
 const ROLES = require('../src/constants/roles');
 
 const createAdmin = async () => {
-  const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/fitness_club_gym';
+  const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
+
+  if (!mongoUri) {
+    console.error('[Seed Error] MONGO_URI environment variable is missing.');
+    process.exit(1);
+  }
   
   const adminEmail = process.env.ADMIN_EMAIL || 'admin@fitnessclubgym.com';
   const adminPassword = process.env.ADMIN_PASSWORD || 'Admin@FitnessClub2026!';

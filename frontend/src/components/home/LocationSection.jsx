@@ -1,6 +1,7 @@
 import React from 'react';
 import { BUSINESS_INFO } from '../../constants';
-import { MapPin, Navigation, ExternalLink } from 'lucide-react';
+import { Navigation, ExternalLink } from 'lucide-react';
+import ScrollReveal from '../common/ScrollReveal';
 
 const LocationSection = () => {
   return (
@@ -10,7 +11,7 @@ const LocationSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Location Info (5 Cols) */}
-          <div className="lg:col-span-5 space-y-8">
+          <ScrollReveal variant="slide-right" delay={0} className="lg:col-span-5 space-y-8">
             <div className="space-y-3">
               <span className="editorial-tag text-amber-500 text-xs block">LOCATION & DIRECTIONS</span>
               <h2 className="text-4xl sm:text-6xl font-display font-extrabold text-white uppercase tracking-tight">
@@ -18,7 +19,7 @@ const LocationSection = () => {
               </h2>
             </div>
 
-            <div className="p-8 rounded-3xl bg-[#11141c] border border-white/10 space-y-4">
+            <div className="p-8 rounded-3xl bg-[#11141c] border border-white/10 space-y-4 card-hover-effect">
               <span className="editorial-tag text-[10px] text-amber-500 block">OFFICIAL ADDRESS</span>
               <p className="text-slate-200 text-sm leading-relaxed font-sans font-medium">
                 {BUSINESS_INFO.address.street},<br />
@@ -35,7 +36,7 @@ const LocationSection = () => {
                 href={BUSINESS_INFO.googleMapsDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-black font-display font-extrabold text-xs uppercase tracking-widest rounded-full transition-all shadow-lg flex items-center gap-2"
+                className="px-8 py-4 bg-amber-500 hover:bg-amber-400 text-black font-display font-extrabold text-xs uppercase tracking-widest rounded-full transition-all duration-300 shadow-lg flex items-center gap-2 hover:scale-105 active:scale-95"
               >
                 <Navigation className="w-4 h-4" />
                 <span>GET DIRECTIONS</span>
@@ -45,28 +46,30 @@ const LocationSection = () => {
                 href={BUSINESS_INFO.googleMapsDirectionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-display font-bold text-xs uppercase tracking-widest rounded-full transition-all border border-white/10 flex items-center gap-2"
+                className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-display font-bold text-xs uppercase tracking-widest rounded-full transition-all duration-300 border border-white/10 hover:border-amber-400/40 flex items-center gap-2 hover:scale-105 active:scale-95"
               >
                 <ExternalLink className="w-4 h-4 text-amber-400" />
                 <span>VIEW LOCATION</span>
               </a>
             </div>
 
-          </div>
+          </ScrollReveal>
 
           {/* Map Embed (7 Cols) */}
-          <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-white/10 shadow-2xl h-[460px] bg-[#11141c]">
-            <iframe
-              title="Fitness Club Gym Location Map"
-              src={`https://maps.google.com/maps?q=${encodeURIComponent(BUSINESS_INFO.address.full)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
+          <ScrollReveal variant="slide-left" delay={150} className="lg:col-span-7">
+            <div className="rounded-3xl overflow-hidden border border-white/10 shadow-2xl h-[460px] bg-[#11141c] card-hover-effect">
+              <iframe
+                title="Fitness Club Gym Location Map"
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(BUSINESS_INFO.address.full)}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </ScrollReveal>
 
         </div>
 

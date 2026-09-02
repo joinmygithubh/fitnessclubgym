@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
+import ScrollReveal from '../common/ScrollReveal';
+import AnimatedCounter from '../common/AnimatedCounter';
 
 const AboutSection = () => {
   return (
@@ -11,9 +13,11 @@ const AboutSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Heading & Editorial Intro */}
-          <div className="lg:col-span-6 space-y-8">
+          <ScrollReveal variant="slide-right" delay={0} className="lg:col-span-6 space-y-8">
             <div className="space-y-3">
-              <span className="editorial-number text-amber-500 text-4xl sm:text-5xl block">01</span>
+              <span className="editorial-number text-amber-500 text-4xl sm:text-5xl block">
+                <AnimatedCounter value="01" />
+              </span>
               <span className="editorial-tag text-slate-400 text-xs block">ABOUT FITNESS CLUB GYM</span>
             </div>
 
@@ -36,20 +40,20 @@ const AboutSection = () => {
                 className="inline-flex items-center gap-2 text-xs font-display font-extrabold uppercase tracking-widest text-amber-400 hover:text-amber-300 group"
               >
                 <span>EXPLORE OUR PHILOSOPHY</span>
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform stroke-[3]" />
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300 stroke-[3]" />
               </Link>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Right Column: Editorial Large Image Composition */}
-          <div className="lg:col-span-6">
-            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl group">
+          <ScrollReveal variant="slide-left" delay={150} className="lg:col-span-6">
+            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl group card-hover-effect">
               <img
                 src="/gym-interior.jpg"
                 alt="Fitness Club Gym Workout Floor"
                 className="w-full h-[480px] sm:h-[560px] object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
               
               <div className="absolute bottom-8 left-8 right-8">
                 <span className="editorial-tag text-[10px] text-amber-400 block mb-1">REAL GYM FACILITY</span>
@@ -58,7 +62,7 @@ const AboutSection = () => {
                 </h3>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
 

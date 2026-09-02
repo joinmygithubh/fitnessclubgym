@@ -1,4 +1,6 @@
 import React from 'react';
+import ScrollReveal from '../common/ScrollReveal';
+import AnimatedCounter from '../common/AnimatedCounter';
 
 const WhyChooseUs = () => {
   const editorialPillars = [
@@ -33,7 +35,7 @@ const WhyChooseUs = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
         
         {/* Editorial Section Header */}
-        <div className="space-y-3 text-left max-w-3xl">
+        <ScrollReveal variant="fade-up" delay={0} className="space-y-3 text-left max-w-3xl">
           <span className="editorial-tag text-amber-500 text-xs block">WHY FITNESS CLUB GYM</span>
           <h2 className="text-4xl sm:text-6xl font-display font-extrabold text-white uppercase tracking-tight">
             WHY TRAIN <span className="gold-gradient-text">WITH US</span>
@@ -41,28 +43,35 @@ const WhyChooseUs = () => {
           <p className="text-slate-400 text-base font-sans pt-2">
             We prioritize real physical progress, authentic atmosphere, and disciplined workout habits.
           </p>
-        </div>
+        </ScrollReveal>
 
         {/* Large Editorial Statement Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
-          {editorialPillars.map((pillar) => (
-            <div
+          {editorialPillars.map((pillar, idx) => (
+            <ScrollReveal
               key={pillar.num}
-              className="space-y-4 p-8 sm:p-10 rounded-3xl bg-[#11141c] border border-white/10 hover:border-amber-500/40 transition-all duration-300 group"
+              variant="fade-up"
+              delay={idx * 100}
             >
-              <div className="flex items-center justify-between border-b border-white/10 pb-6">
-                <span className="editorial-number text-amber-500 text-3xl font-extrabold">{pillar.num}</span>
-                <span className="editorial-tag text-[10px] text-slate-400">{pillar.subtitle}</span>
+              <div
+                className="space-y-4 p-8 sm:p-10 rounded-3xl bg-[#11141c] border border-white/10 hover:border-amber-500/40 card-hover-effect group h-full"
+              >
+                <div className="flex items-center justify-between border-b border-white/10 pb-6">
+                  <span className="editorial-number text-amber-500 text-3xl font-extrabold">
+                    <AnimatedCounter value={pillar.num} />
+                  </span>
+                  <span className="editorial-tag text-[10px] text-slate-400">{pillar.subtitle}</span>
+                </div>
+
+                <h3 className="text-3xl sm:text-4xl font-display font-extrabold text-white uppercase tracking-tight group-hover:text-amber-400 transition-colors">
+                  {pillar.title}
+                </h3>
+
+                <p className="text-sm text-slate-300 font-sans leading-relaxed pt-2">
+                  {pillar.description}
+                </p>
               </div>
-
-              <h3 className="text-3xl sm:text-4xl font-display font-extrabold text-white uppercase tracking-tight group-hover:text-amber-400 transition-colors">
-                {pillar.title}
-              </h3>
-
-              <p className="text-sm text-slate-300 font-sans leading-relaxed pt-2">
-                {pillar.description}
-              </p>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
 

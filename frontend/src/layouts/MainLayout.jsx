@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import AnnouncementBanner from '../components/layout/AnnouncementBanner';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import { GET_WHATSAPP_LINK } from '../constants';
@@ -8,6 +9,7 @@ import { MessageSquare } from 'lucide-react';
 const MainLayout = () => {
   return (
     <div className="min-h-screen flex flex-col bg-[#08090c] text-slate-100 relative font-sans">
+      <AnnouncementBanner />
       <Navbar />
       <main className="flex-grow">
         <Outlet />

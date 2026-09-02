@@ -94,9 +94,9 @@ const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all ${
+                className={`px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 nav-link-hover ${
                   isActive(link.path)
-                    ? 'text-amber-400 bg-amber-500/10 border border-amber-500/30'
+                    ? 'text-amber-400 bg-amber-500/10 border border-amber-500/30 active'
                     : 'text-slate-300 hover:text-white hover:bg-white/5'
                 }`}
               >
@@ -107,7 +107,7 @@ const Navbar = () => {
             {isAdmin && (
               <Link
                 to="/admin"
-                className="px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest text-amber-400 bg-amber-500/10 border border-amber-500/40 flex items-center gap-1.5 hover:bg-amber-500/20 transition-all ml-2"
+                className="px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest text-amber-400 bg-amber-500/10 border border-amber-500/40 flex items-center gap-1.5 hover:bg-amber-500/20 transition-all duration-300 ml-2 hover:scale-105"
               >
                 <Shield className="w-3.5 h-3.5" />
                 <span>Admin</span>
@@ -119,7 +119,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-3">
             <a
               href={`tel:${BUSINESS_INFO.phones[0]}`}
-              className="px-4 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-widest text-slate-200 bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-center gap-2"
+              className="px-4 py-2.5 rounded-full text-xs font-extrabold uppercase tracking-widest text-slate-200 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-amber-400/40 transition-all duration-300 flex items-center gap-2 hover:scale-105 active:scale-95"
             >
               <Phone className="w-3.5 h-3.5 text-amber-400" />
               <span>CALL</span>
@@ -127,10 +127,10 @@ const Navbar = () => {
 
             <Link
               to="/membership"
-              className="px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest bg-amber-500 hover:bg-amber-400 text-black shadow-lg shadow-amber-500/20 transition-all flex items-center gap-1.5 hover:scale-105"
+              className="px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest bg-amber-500 hover:bg-amber-400 text-black shadow-lg shadow-amber-500/20 transition-all duration-300 flex items-center gap-1.5 hover:scale-105 active:scale-95 group"
             >
               <span>JOIN NOW</span>
-              <ArrowUpRight className="w-3.5 h-3.5 stroke-[3]" />
+              <ArrowUpRight className="w-3.5 h-3.5 stroke-[3] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </Link>
 
             {isAuthenticated && (
